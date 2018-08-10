@@ -10,6 +10,16 @@
 #                                                                              #
 # **************************************************************************** #
 
+COLOR_OFF=\033[0m#			# Text Reset
+BLACK	=\033[0;30m#		# Black
+RED		=\033[0;31m#		# Red
+GREEN	=\033[0;32m#		# Green
+YELLOW	=\033[0;33m#		# Yellow
+BLUE	=\033[0;34m#		# Blue
+PURPLE	=\033[0;35m#		# Purple
+CYAN	=\033[0;36m#		# Cyan
+WHITE	=\033[0;37m#		# White
+
 CC=gcc 
 CFLAGS=-Wall -Werror -Wextra
 SRC=./ft_memset.c \
@@ -101,15 +111,17 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(HEADER)
 	@ar rc $(NAME) $(OBJ)
-	@ printf "\e[37;1m[\e[33;1mlibft.a \e[37;1mis \e[32;1mREADY!\e[37;1m]\e[0m📚\n"
+	@ printf "\n\n###	$(YELLOW) libft.a $(COLOR_OFF) is $(GREEN)READY!$(COLOR_OFF) 📚	###\n\n"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -o $@ -c $< -I ./
+	@printf "$(CYAN)*$(COLOR_OFF)"
 
 clean:
 	@rm -f $(OBJ)
 
 fclean: clean
 	@rm -f $(NAME)
+	@printf "$(RED)remove $(NAME)$(COLOR_OFF)\n"
 
 re: fclean all

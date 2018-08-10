@@ -33,8 +33,9 @@ static void		output_chars(unsigned char *s, unsigned char len,
 
 static void		print_hex(unsigned char c)
 {
-	char		*base = "0123456789abcdef";
+	char		*base;
 
+	base = "0123456789abcdef";
 	write(1, &base[c / 16], 1);
 	write(1, &base[c % 16], 1);
 }
@@ -42,8 +43,8 @@ static void		print_hex(unsigned char c)
 void			print_memory(const void *addr, size_t size)
 {
 	unsigned char	*tab;
-	unsigned char	i;	/* counter for every 16 elements of an array. */
-	unsigned char	spaces; /* counter of spaces for one row. */
+	unsigned char	i;
+	unsigned char	spaces;
 
 	tab = (unsigned char *)addr;
 	while (size != 0 && tab)
@@ -56,7 +57,7 @@ void			print_memory(const void *addr, size_t size)
 			i++;
 			spaces -= 2;
 			size--;
-			if (i % 2 == 0)	/* two numbers have been written. */
+			if (i % 2 == 0)
 			{
 				write(1, " ", 1);
 				spaces--;

@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_uint.c                                       :+:      :+:    :+:   */
+/*   check_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkiselev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/14 15:31:47 by tkiselev          #+#    #+#             */
-/*   Updated: 2018/07/14 17:52:47 by tkiselev         ###   ########.fr       */
+/*   Created: 2018/07/19 14:03:16 by tkiselev          #+#    #+#             */
+/*   Updated: 2018/07/19 14:03:20 by tkiselev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "corewar.h"
 
-char		ft_is_uint(char *str)
+void				check_magic_header(int fd)
 {
-	int		res;
-	int		i;
+	unsigned int	magic_header;
 
-	if (!str)
-		return (0);
-	res = 0;
-	i = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		if ((res == 429496729 && str[i] >= '6') || res > 429496730)
-			return (0);
-		res = res * 10 + str[i++] - '0';
-	}
-	return ((i > 0 && str[i] == '\0') ? 1 : 0);
+	if (read(fd, &magic_header, 4) != 4)
+		ft_error(ERR_109);
+	magic_header = reverse_bytes(magic_header, 4);
+	if (magic_header != COREWAR_EXEC_MAGIC)
+		ft_error(ERR_110);
 }

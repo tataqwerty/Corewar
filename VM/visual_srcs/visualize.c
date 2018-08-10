@@ -1,37 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_pushback.c                                 :+:      :+:    :+:   */
+/*   visualize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkiselev <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/13 15:54:06 by tkiselev          #+#    #+#             */
-/*   Updated: 2018/07/13 15:54:09 by tkiselev         ###   ########.fr       */
+/*   Created: 2018/07/22 16:02:56 by tkiselev          #+#    #+#             */
+/*   Updated: 2018/07/22 16:02:58 by tkiselev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "corewar.h"
 
-void		ft_list_pushback(t_list **head, char *line)
+/*
+** line 32: '3' - is a CTRL + C
+*/
+
+void	visualize(void)
 {
-	t_list	*tmp;
-	t_list	*new;
+	t_win	*win;
 
-	tmp = *head;
-	while (tmp)
-	{
-		if (tmp->next)
-			tmp = tmp->next;
-		else
-			break ;
-	}
-	if (!(new = (t_list*)malloc(sizeof(t_list))))
-		return ;
-	new->content = ft_strdup(line);
-	new->content_size = ft_strlen(line);
-	new->next = NULL;
-	if (!*head)
-		*head = new;
-	else
-		tmp->next = new;
+	create_pixel_map();
+	fill_pixel_map();
+	initscr();
+	noecho();
+	raw();
+	color_preparation();
+	win = init_win();
+	if (g_vm->flag_dump)
+		while (g_vm->cur_cycle < g_vm->dump_cycles && !g_vm->winner)
+		{
+			step();
+			handle_pixels();
+		}
+	prepare_window(win);
+	redraw(win);
+	delwin(win->window);
+	endwin();
+	free(win);
 }

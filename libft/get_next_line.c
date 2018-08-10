@@ -79,4 +79,3 @@ int					get_next_line(const int fd, char **line)
 	}
 	return (((*line) == NULL) ? 0 : 1);
 }
-
