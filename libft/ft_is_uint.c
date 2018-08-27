@@ -21,6 +21,7 @@ char		ft_is_uint(char *str)
 		return (0);
 	res = 0;
 	i = 0;
+	(str[0] == '-' || str[0] == '+') ? str++ : 0;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		if ((res == 429496729 && str[i] >= '6') || res > 429496730)

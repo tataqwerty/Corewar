@@ -84,7 +84,7 @@ OK_STRING    =\#\#\#	$(GREEN)$(NAME)$(COLOR_OFF) is $(GREEN)READY!$(COLOR_OFF)	\
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ)
 	@$(CC) $(FLAGS) $(LIBFT) $(OBJ) -I $(INCLD_DIR) -o $(NAME) -lncurses
 	@printf "\n\n$(OK_STRING)\n\n"
 

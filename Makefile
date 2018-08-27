@@ -22,7 +22,7 @@ WHITE	=\033[0;37m#		# White
 
 OK_STRING    =\#\#\#	 $(NAME) created		\#\#\#
 
-LIB=./libft/
+
 VM_D=./VM/
 ASM_D=./ASSEMBLER/
 
@@ -30,7 +30,7 @@ ASM_D=./ASSEMBLER/
 VM=		corewar
 ASM=	asm
 
-all: lib virtual assemb
+all: virtual assemb
 
 virtual:
 	@$(MAKE) -C $(VM_D)
@@ -39,9 +39,6 @@ virtual:
 assemb:
 	@$(MAKE) -C $(ASM_D)
 	@cp $(ASM_D)$(ASM) $(ASM)
-
-lib:
-	@$(MAKE) -C $(LIB)
 
 clean:
 	@$(MAKE) clean -C $(VM_D)

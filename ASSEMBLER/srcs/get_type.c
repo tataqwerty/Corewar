@@ -19,7 +19,7 @@ static	char	is_treg(char *str)
 	if (*str == 'r')
 	{
 		str++;
-		if (!ft_is_uint(str))
+		if (!ft_is_uint(str) || *str == '-' || *str == '+')
 			return (0);
 		tmp = ft_atoi(str);
 		if (tmp >= 0 && tmp <= REG_NUMBER)
